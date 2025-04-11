@@ -18,7 +18,8 @@ const ContentCarousel: React.FC<ContentCarouselProps> = ({ category }) => {
     <div className="relative w-full">
       <Carousel 
         title={category.name} 
-        items={filteredItems} 
+        items={filteredItems}
+        showArchiveButton={false}
       />
     </div>
   ) : null;

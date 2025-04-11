@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import { useMyList } from '../hooks/use-my-list';
 import { useNavigate } from 'react-router-dom';
-import { Star } from 'lucide-react';
+import { Archive } from 'lucide-react';
 
 const MyList: React.FC = () => {
   const { myList, removeFromMyList } = useMyList();
@@ -17,12 +17,12 @@ const MyList: React.FC = () => {
     <div className="min-h-screen bg-netflix-background text-white">
       <Header />
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold mb-8">Starred</h1>
+        <h1 className="text-4xl font-bold mb-8">Archived</h1>
         
         {myList.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-xl mb-4">Your list is empty</p>
-            <p className="text-gray-400">Add items by clicking the star icon on content you like</p>
+            <p className="text-xl mb-4">Your archive is empty</p>
+            <p className="text-gray-400">Add items by clicking the archive icon on content you like</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -49,7 +49,7 @@ const MyList: React.FC = () => {
                     removeFromMyList(item.id);
                   }}
                 >
-                  <Star size={20} className="fill-yellow-400 text-yellow-400" />
+                  <Archive size={20} className="fill-blue-400 text-blue-400" />
                 </button>
               </div>
             ))}

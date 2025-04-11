@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ContentItem } from '../types/content';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Archive, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useMyList } from '@/hooks/use-my-list';
@@ -11,12 +11,14 @@ interface CarouselProps {
   title: string;
   items: ContentItem[];
   className?: string;
+  showArchiveButton?: boolean;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   title,
   items,
-  className
+  className,
+  showArchiveButton = true
 }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -41,8 +43,8 @@ const Carousel: React.FC<CarouselProps> = ({
     navigate(`/content/${id}`);
   };
 
-  const handleStarClick = (e: React.MouseEvent, item: ContentItem) => {
-    e.stopPropagation(); // Prevent navigation on star click
+  const handleArchiveClick = (e: React.MouseEvent, item: ContentItem) => {
+    e.stopPropagation(); // Prevent navigation on archive click
     
     if (isInMyList(item.id)) {
       removeFromMyList(item.id);
@@ -72,10 +74,12 @@ const Carousel: React.FC<CarouselProps> = ({
                         }} 
                       />
                     </div>
-                    {/* Star button */}
-                    <div className="absolute top-4 right-4 p-2 z-20 invisible group-hover/item:visible" onClick={e => handleStarClick(e, item)}>
-                      <Star size={24} className={cn("transition-colors duration-300", isInMyList(item.id) ? "fill-yellow-400 text-yellow-400" : "text-white hover:text-yellow-400")} />
-                    </div>
+                    {/* Archive button - only show if showArchiveButton is true */}
+                    {showArchiveButton && (
+                      <div className="absolute top-4 right-4 p-2 z-20 invisible group-hover/item:visible" onClick={e => handleArchiveClick(e, item)}>
+                        <Archive size={24} className={cn("transition-colors duration-300", isInMyList(item.id) ? "fill-blue-400 text-blue-400" : "text-white hover:text-blue-400")} />
+                      </div>
+                    )}
                     {/* Title overlay - visible on hover without gradient */}
                     <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
                       <h3 className="text-gray-400 text-6xl font-bold drop-shadow-xl">{item.title}</h3>
