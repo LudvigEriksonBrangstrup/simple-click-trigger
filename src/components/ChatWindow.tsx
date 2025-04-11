@@ -93,7 +93,7 @@ const ChatWindow: React.FC = () => {
         <div ref={chatContainerRef}>
           {messages.length === 0 && (
             <div className="text-center py-8 text-gray-400 italic">
-              Ask me about our robots, and I'll help you find the perfect fit for your needs.
+              Describe what you need a robot for, and I'll help you find the perfect fit for your needs.
             </div>
           )}
           
