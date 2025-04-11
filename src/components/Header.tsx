@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Star, Home } from 'lucide-react';
+import { Search, Star, Home, Compass } from 'lucide-react';
 
 const Header: React.FC = () => {
   return (
@@ -14,6 +14,10 @@ const Header: React.FC = () => {
           <Link to="/" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm">
             <Home size={16} />
             <span>Home</span>
+          </Link>
+          <Link to="/explore" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm">
+            <Compass size={16} />
+            <span>Explore</span>
           </Link>
           <Link to="/my-list" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm">
             <Star size={16} />

@@ -1,16 +1,21 @@
-import React from 'react';
-import Layout from '@/components/layout/Layout';
 
-// This is needed to make TypeScript recognize webkitdirectory as a valid attribute
-declare module 'react' {
-  interface InputHTMLAttributes<T> extends React.HTMLAttributes<T> {
-    directory?: string;
-    webkitdirectory?: string;
-  }
-}
+import React from 'react';
+import Header from '@/components/Header';
+import URDFViewer from '@/components/URDFViewer';
 
 const NewAndPopular: React.FC = () => {
-  return <Layout inputCustomUrdfPath='/urdf/cassie_description/urdf/cassie_v4.urdf' />;
+  return (
+    <div className="min-h-screen bg-netflix-background text-netflix-text">
+      <Header />
+      <div className="mt-20 p-4">
+        <h1 className="text-4xl font-bold mb-6">New & Popular</h1>
+        <div className="h-[600px] rounded-lg overflow-hidden">
+          {/* Pass hasAnimation prop without inputCustomUrdfPath */}
+          <URDFViewer hasAnimation={true} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default NewAndPopular;

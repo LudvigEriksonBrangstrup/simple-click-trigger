@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -11,6 +12,7 @@ import IndexCopy from "./pages/IndexCopy";
 import ContentDetail from "./pages/ContentDetail";
 import MyList from "./pages/MyList";
 import NewAndPopular from './pages/NewAndPopular';
+import Explore from './pages/Explore';
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { DragAndDropProvider } from "./contexts/DragAndDropContext";
 import { UrdfProvider } from "./contexts/UrdfContext";
@@ -44,7 +46,8 @@ const App = () => {
                     <Route path="/content/:id" element={<ContentDetail />} />
                     <Route path="/my-list" element={<MyList />} />
                     <Route path="*" element={<NotFound />} />
-                    <Route path="New" element={<NewAndPopular />}/>
+                    <Route path="/new" element={<NewAndPopular />}/>
+                    <Route path="/explore" element={<Explore />}/>
                   </Routes>
                 </BrowserRouter>
               </MyListProvider>
