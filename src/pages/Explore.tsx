@@ -53,8 +53,8 @@ const Explore: React.FC = () => {
           }`} 
           style={{ width: "33.333%" }}
         >
-          <div className="h-full relative flex flex-col">
-            <div className="flex-1 overflow-hidden p-4">
+          <div className="h-full bg-[rgba(10,10,20,0.8)] backdrop-blur-lg border border-white/10 rounded-r-lg shadow-xl">
+            <div className="flex-1 h-full overflow-hidden">
               <ChatWindow />
             </div>
             
