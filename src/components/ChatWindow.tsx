@@ -87,7 +87,7 @@ const ChatWindow: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-full bg-[rgba(10,10,20,0.8)] backdrop-blur-lg text-white">
+    <div className="flex flex-col h-full bg-transparent text-white">
       {/* Messages area */}
       <ScrollArea className="flex-1 px-4 py-4 overflow-y-auto">
         <div ref={chatContainerRef}>

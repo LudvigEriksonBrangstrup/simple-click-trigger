@@ -48,8 +48,8 @@ const Explore: React.FC = () => {
       <div className="flex relative z-10 pt-24">
         {/* Chat sidebar with toggle button */}
         <div 
-          className={`fixed top-24 bottom-0 transition-all duration-300 z-20 ${
-            chatVisible ? "left-0" : "-left-[calc(33.333%-40px)]"
+          className={`fixed top-24 bottom-0 transition-all duration-300 ease-in-out z-20 ${
+            chatVisible ? "left-0" : "-left-full"
           }`} 
           style={{ width: "33.333%" }}
         >
@@ -57,22 +57,26 @@ const Explore: React.FC = () => {
             <div className="flex-1 h-full overflow-hidden">
               <ChatWindow />
             </div>
-            
-            {/* Toggle button */}
-            <button 
-              onClick={toggleChat}
-              className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-sidebar-accent hover:bg-blue-700 text-white p-2 rounded-r-lg shadow-lg transition-all duration-200"
-              aria-label={chatVisible ? "Hide chat" : "Show chat"}
-            >
-              {chatVisible ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-            </button>
           </div>
         </div>
+        
+        {/* Toggle button - now more sleek and compact */}
+        <button 
+          onClick={toggleChat}
+          className={`fixed z-30 top-1/2 transform -translate-y-1/2 transition-all duration-300 bg-[rgba(10,10,20,0.75)] backdrop-blur-sm hover:bg-blue-700/75 text-white p-2 shadow-lg border border-white/10 ${
+            chatVisible 
+              ? "left-[calc(33.333%-1px)] rounded-r-md" 
+              : "left-0 rounded-r-md"
+          }`}
+          aria-label={chatVisible ? "Hide chat" : "Show chat"}
+        >
+          {chatVisible ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        </button>
 
         {/* Main content area */}
         <main 
-          className={`transition-all duration-300 pb-8 ${
-            chatVisible ? "ml-[33.333%]" : "ml-10"
+          className={`transition-all duration-300 ease-in-out pb-8 ${
+            chatVisible ? "ml-[33.333%]" : "ml-0"
           } w-full`}
         >
           <div className="container mx-auto px-4 max-w-full">
