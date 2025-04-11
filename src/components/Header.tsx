@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Star, Home, Compass } from 'lucide-react';
+import { Search, Archive, Home, Compass } from 'lucide-react';
+
 const Header: React.FC = () => {
   return <header className="bg-black/90 backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-50 shadow-lg border-b border-white/5">
       <div className="flex items-center">
@@ -17,7 +19,7 @@ const Header: React.FC = () => {
             <span>Explore</span>
           </Link>
           <Link to="/my-list" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm">
-            <Star size={16} />
+            <Archive size={16} />
             <span>Projects</span>
           </Link>
         </nav>
@@ -31,4 +33,5 @@ const Header: React.FC = () => {
       </div>
     </header>;
 };
+
 export default Header;
