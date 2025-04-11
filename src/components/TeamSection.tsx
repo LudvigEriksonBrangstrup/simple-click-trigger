@@ -15,28 +15,28 @@ const teamMembers: TeamMember[] = [
   {
     id: "1",
     name: "Max",
-    role: "Lead Engineer",
+    role: "Co-founder",
     imageUrl: "/lovable-uploads/07251c16-3e3c-4c40-8450-c6c17f291e00.png",
     bio: "Max is a cracked engineer who leads our engineering team with exceptional expertise."
   },
   {
     id: "2",
     name: "Ludvig",
-    role: "Robotics Specialist",
+    role: "Co-founder",
     imageUrl: "/lovable-uploads/e6811f8e-3c1e-4a80-80e5-4b82f4704aec.png",
     bio: "Ludvig is a cracked engineer specializing in advanced robotics systems."
   },
   {
     id: "3",
     name: "Victor",
-    role: "AI Researcher",
+    role: "Co-founder",
     imageUrl: "/lovable-uploads/21f0e012-4ef0-4db0-a1e2-aa5205c8400e.png",
     bio: "Victor is a cracked engineer developing cutting-edge AI technologies."
   },
   {
     id: "4",
     name: "Fabian",
-    role: "UX Designer",
+    role: "Co-founder",
     imageUrl: "/lovable-uploads/e6f4bf50-ed44-4ce7-9fab-ff8a9476b584.png",
     bio: "Fabian is an almost cracked engineer who creates intuitive user experiences."
   }
