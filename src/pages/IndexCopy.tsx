@@ -54,7 +54,7 @@ const IndexCopy: React.FC = () => {
 
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with parallax text */}
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-visible">
           <div className="w-full relative mb-8 flex items-start justify-center">
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
@@ -66,11 +66,11 @@ const IndexCopy: React.FC = () => {
                 <span className="block text-gradient-white pb-4">AGENTS</span>
               </h1>
               
-              {/* Spline 3D Asset moved below title with negative margin to create overlap */}
-              <div className="w-full h-[300px] relative -mt-20 z-0">
+              {/* Spline 3D Asset with increased height and no overflow cutting */}
+              <div className="w-full h-[400px] relative -mt-20 z-0 overflow-visible">
                 <SplineViewer 
                   splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                  className="h-full"
+                  className="h-full overflow-visible"
                 />
               </div>
             </div>
