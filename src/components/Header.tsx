@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Archive, Home, Compass } from 'lucide-react';
 const Header: React.FC = () => {
-  return <header className="bg-black/90 backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-50 shadow-lg border-b border-white/5">
+  return <header className="backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-50 shadow-lg border-b border-white/5 bg-zinc-950">
       <div className="flex items-center">
         <Link to="/" className="flex items-center mr-8 group">
           <div className="w-10 h-10 overflow-hidden">
