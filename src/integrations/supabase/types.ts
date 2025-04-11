@@ -11,10 +11,10 @@ export type Database = {
     Tables: {
       urdf: {
         Row: {
-          container_id: string | null
           dof: number | null
           has_manipulator: boolean | null
           id: string
+          image_uri: string | null
           joints: Json | null
           links: Json | null
           maker: string | null
@@ -30,10 +30,10 @@ export type Database = {
           urdf_uri: string | null
         }
         Insert: {
-          container_id?: string | null
           dof?: number | null
           has_manipulator?: boolean | null
           id?: string
+          image_uri?: string | null
           joints?: Json | null
           links?: Json | null
           maker?: string | null
@@ -49,10 +49,10 @@ export type Database = {
           urdf_uri?: string | null
         }
         Update: {
-          container_id?: string | null
           dof?: number | null
           has_manipulator?: boolean | null
           id?: string
+          image_uri?: string | null
           joints?: Json | null
           links?: Json | null
           maker?: string | null

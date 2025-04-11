@@ -55,17 +55,9 @@ const IndexCopy: React.FC = () => {
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with parallax text */}
         <section className="relative overflow-hidden">
-          {/* Spline 3D Asset */}
-          <div className="w-full h-[400px] relative">
-            <SplineViewer 
-              splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-              className="h-full"
-            />
-          </div>
-          
           <div className="w-full relative mb-8 flex items-start justify-center">
             {/* Parallax text container */}
-            <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-4 pt-4">
+            <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
               <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
                 <span className="block -mb-12 text-gradient-white">PROMPT</span>
                 <span className="block -mb-12 text-gradient-white">
@@ -73,6 +65,14 @@ const IndexCopy: React.FC = () => {
                 </span>
                 <span className="block text-gradient-white pb-4">AGENTS</span>
               </h1>
+              
+              {/* Spline 3D Asset moved below title with negative margin to create overlap */}
+              <div className="w-full h-[300px] relative -mt-20 z-0">
+                <SplineViewer 
+                  splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
+                  className="h-full"
+                />
+              </div>
             </div>
           </div>
         </section>
