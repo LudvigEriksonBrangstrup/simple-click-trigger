@@ -1,9 +1,11 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
 import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
+
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -31,6 +33,7 @@ const IndexCopy: React.FC = () => {
 
   // Only get the trending category
   const trendingCategory = categories.find(category => category.id === "trending");
+
   return <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
@@ -51,7 +54,7 @@ const IndexCopy: React.FC = () => {
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with parallax text */}
         <section className="relative overflow-hidden">
-          <div className="w-full h-[160vh] relative mb-8 flex items-start justify-center">
+          <div className="w-full relative mb-8 flex items-start justify-center">
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
               <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
@@ -65,16 +68,15 @@ const IndexCopy: React.FC = () => {
           </div>
         </section>
 
+        {/* Chat Window Section - Moved right below the title */}
+        <section className="mb-20 max-w-4xl mx-auto">
+          <div className="glass-panel">
+            <ChatWindow />
+          </div>
+        </section>
+
         {/* Content sections with glass panels */}
         <div className="relative z-10">
-          {/* Chat Window Section */}
-          <section className="mb-60 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-netflix-text text-center">Chat with Agent</h2>
-            <div className="glass-panel">
-              <ChatWindow />
-            </div>
-          </section>
-
           {/* Team Section */}
           <TeamSection />
 
@@ -94,4 +96,5 @@ const IndexCopy: React.FC = () => {
       </main>
     </div>;
 };
+
 export default IndexCopy;

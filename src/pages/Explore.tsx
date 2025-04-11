@@ -1,3 +1,4 @@
+
 import React from "react";
 import { contentItems } from "../data/content";
 import Header from "../components/Header";
@@ -5,6 +6,7 @@ import Carousel from "../components/Carousel";
 import TeamSection from "../components/TeamSection";
 import { ContentItem } from "../types/content";
 import ChatWindow from "../components/ChatWindow";
+
 const Explore: React.FC = () => {
   // Group content items by categories
   const categorizedContent = contentItems.reduce((acc, item) => {
@@ -19,6 +21,7 @@ const Explore: React.FC = () => {
 
   // Get unique categories
   const uniqueCategories = Object.keys(categorizedContent).sort();
+
   return <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
@@ -35,25 +38,22 @@ const Explore: React.FC = () => {
       </div>
 
       <div className="pt-24 relative z-10">
-        {/* Chat window at the top */}
-        <section className="mb-12 max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-netflix-text text-center">
-            Talk to Our AI Assistant
-          </h2>
-          <div className="glass-panel">
-            <ChatWindow />
-          </div>
-        </section>
-
         {/* Main content area */}
         <main className="container mx-auto px-4 pb-8 max-w-full">
           {/* Page title */}
-          <div className="mb-12 text-center">
+          <div className="mb-6 text-center">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white animate-fade-in">
               Explore All Robots
             </h1>
             <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">Browse our complete collection of robotics systems and deployable URDF units</p>
           </div>
+
+          {/* Chat window right below the title */}
+          <section className="mb-12 max-w-4xl mx-auto">
+            <div className="glass-panel">
+              <ChatWindow />
+            </div>
+          </section>
 
           {/* Content sections */}
           <div className="relative z-10">
@@ -75,4 +75,5 @@ const Explore: React.FC = () => {
       </div>
     </div>;
 };
+
 export default Explore;
