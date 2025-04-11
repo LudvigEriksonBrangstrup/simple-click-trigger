@@ -1,11 +1,9 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
 import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
-
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -25,19 +23,15 @@ const IndexCopy: React.FC = () => {
     };
 
     // Initialize section references
-    const categoryElements =
-      document.querySelectorAll<HTMLElement>(".category-section");
+    const categoryElements = document.querySelectorAll<HTMLElement>(".category-section");
     sectionRefs.current = Array.from(categoryElements);
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Only get the trending category
   const trendingCategory = categories.find(category => category.id === "trending");
-
-  return (
-    <div className="min-h-screen bg-netflix-background text-netflix-text">
+  return <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
       {/* Cosmic background wrapper for the entire page */}
@@ -61,7 +55,7 @@ const IndexCopy: React.FC = () => {
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
               <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
-                <span className="block -mb-12 text-gradient-white">BUILD</span>
+                <span className="block -mb-12 text-gradient-white">FIND</span>
                 <span className="block -mb-12 text-gradient-white">
                   SPATIAL
                 </span>
@@ -87,26 +81,19 @@ const IndexCopy: React.FC = () => {
           <TeamSection />
 
           {/* Only display trending category */}
-          {trendingCategory && (
-            <section className="category-section min-h-[20vh] mt-12">
+          {trendingCategory && <section className="category-section min-h-[20vh] mt-12">
               <h2 className="text-3xl font-bold mb-8 text-netflix-text text-glow">
                 {trendingCategory.name}
               </h2>
               <ContentCarousel key={trendingCategory.id} category={trendingCategory} />
               <div className="mt-6 text-center">
-                <a 
-                  href="/explore" 
-                  className="inline-block bg-sidebar-accent px-6 py-3 rounded-lg text-white font-semibold hover:bg-opacity-80 transition-colors"
-                >
+                <a href="/explore" className="inline-block bg-sidebar-accent px-6 py-3 rounded-lg text-white font-semibold hover:bg-opacity-80 transition-colors">
                   Explore All Robots
                 </a>
               </div>
-            </section>
-          )}
+            </section>}
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default IndexCopy;
