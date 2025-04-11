@@ -17,6 +17,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { DragAndDropProvider } from "./contexts/DragAndDropContext";
 import { UrdfProvider } from "./contexts/UrdfContext";
 import { MyListProvider } from './hooks/use-my-list';
+import { ProjectsProvider } from './hooks/use-projects';
 
 const queryClient = new QueryClient();
 
@@ -37,19 +38,21 @@ const App = () => {
           <UrdfProvider>
             <DragAndDropProvider>
               <MyListProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-                  <Routes>
-                    <Route path="old-index" element={<Index />} />
-                    <Route path="/" element={<IndexCopy />} />
-                    <Route path="/content/:id" element={<ContentDetail />} />
-                    <Route path="/my-list" element={<MyList />} />
-                    <Route path="*" element={<NotFound />} />
-                    <Route path="/new" element={<NewAndPopular />}/>
-                    <Route path="/explore" element={<Explore />}/>
-                  </Routes>
-                </BrowserRouter>
+                <ProjectsProvider>
+                  <Toaster />
+                  <Sonner />
+                  <BrowserRouter>
+                    <Routes>
+                      <Route path="old-index" element={<Index />} />
+                      <Route path="/" element={<IndexCopy />} />
+                      <Route path="/content/:id" element={<ContentDetail />} />
+                      <Route path="/my-list" element={<MyList />} />
+                      <Route path="*" element={<NotFound />} />
+                      <Route path="/new" element={<NewAndPopular />}/>
+                      <Route path="/explore" element={<Explore />}/>
+                    </Routes>
+                  </BrowserRouter>
+                </ProjectsProvider>
               </MyListProvider>
             </DragAndDropProvider>
           </UrdfProvider>
