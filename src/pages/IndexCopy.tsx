@@ -55,7 +55,7 @@ const IndexCopy: React.FC = () => {
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
               <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
-                <span className="block -mb-12 text-gradient-white">FIND</span>
+                <span className="block -mb-12 text-gradient-white">PROMPT</span>
                 <span className="block -mb-12 text-gradient-white">
                   SPATIAL
                 </span>
