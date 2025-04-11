@@ -14,31 +14,31 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: "1",
-    name: "Alex Johnson",
+    name: "Max",
     role: "Lead Engineer",
     imageUrl: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=300&h=300&auto=format&fit=crop",
-    bio: "Alex leads our engineering team with over 10 years of robotics experience."
+    bio: "Max leads our engineering team with expertise in robotics and AI integration."
   },
   {
     id: "2",
-    name: "Sarah Williams",
+    name: "Ludvig",
     role: "Robotics Specialist",
     imageUrl: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&h=300&auto=format&fit=crop",
-    bio: "Sarah specializes in bipedal robot movement and stability systems."
+    bio: "Ludvig specializes in bipedal robot movement and stability systems."
   },
   {
     id: "3",
-    name: "Michael Chen",
+    name: "Victor",
     role: "AI Researcher",
     imageUrl: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=300&h=300&auto=format&fit=crop",
-    bio: "Michael focuses on developing advanced AI systems for autonomous robots."
+    bio: "Victor focuses on developing advanced AI systems for autonomous robots."
   },
   {
     id: "4",
-    name: "Priya Patel",
+    name: "Fabian",
     role: "UX Designer",
     imageUrl: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?q=80&w=300&h=300&auto=format&fit=crop",
-    bio: "Priya designs intuitive interfaces for human-robot interaction."
+    bio: "Fabian designs intuitive interfaces for human-robot interaction."
   }
 ];
 
