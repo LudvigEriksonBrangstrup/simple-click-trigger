@@ -1,16 +1,17 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { contentItems } from '../data/content';
-import { Send, FolderPlus } from 'lucide-react';
+import { Send, Archive } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import ProjectSelector from './ProjectSelector';
 import { ContentItem } from '@/types/content';
+import { useMyList } from '@/hooks/use-my-list';
+import { cn } from '@/lib/utils';
 
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<{
     sender: string;
     text: string;
-    imageUrl?: string;
     robotData?: ContentItem;
   }[]>([]);
   const [input, setInput] = useState('');
@@ -18,6 +19,7 @@ const ChatWindow: React.FC = () => {
   const [isProjectSelectorOpen, setIsProjectSelectorOpen] = useState(false);
   const [selectedRobot, setSelectedRobot] = useState<ContentItem | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const { isInMyList } = useMyList();
 
   const fetchLLMResponseChunked = async (userMessage: string, onChunk: (chunk: string) => void): Promise<void> => {
     // Use contentItems instead of hardcoded movies
@@ -43,8 +45,8 @@ const ChatWindow: React.FC = () => {
       onChunk(word + ' ');
     }
 
-    // Add the image URL and robot data as the final chunk
-    onChunk(`__IMAGE__${selectedItem.imageUrl}__DATA__${selectedItem.id}`);
+    // Add the robot data as the final chunk
+    onChunk(`__DATA__${selectedItem.id}`);
   };
 
   const handleSend = async () => {
@@ -68,16 +70,11 @@ const ChatWindow: React.FC = () => {
           const lastMessage = updatedMessages[updatedMessages.length - 1];
           
           if (lastMessage.sender === 'Bot') {
-            if (chunk.startsWith('__IMAGE__')) {
-              const parts = chunk.split('__DATA__');
-              lastMessage.imageUrl = parts[0].replace('__IMAGE__', '');
-              
-              if (parts.length > 1) {
-                const robotId = parts[1];
-                const robot = contentItems.find(item => item.id === robotId);
-                if (robot) {
-                  lastMessage.robotData = robot;
-                }
+            if (chunk.startsWith('__DATA__')) {
+              const robotId = chunk.replace('__DATA__', '');
+              const robot = contentItems.find(item => item.id === robotId);
+              if (robot) {
+                lastMessage.robotData = robot;
               }
             } else {
               lastMessage.text += chunk;
@@ -92,8 +89,9 @@ const ChatWindow: React.FC = () => {
     }
   };
 
-  const handleAddToProject = (robotData: ContentItem) => {
-    setSelectedRobot(robotData);
+  const handleArchiveClick = (e: React.MouseEvent, item: ContentItem) => {
+    e.stopPropagation(); // Prevent navigation
+    setSelectedRobot(item);
     setIsProjectSelectorOpen(true);
   };
 
@@ -143,24 +141,33 @@ const ChatWindow: React.FC = () => {
                 {message.text}
               </span>
               
-              {message.imageUrl && (
-                <div className="mt-3 relative group">
-                  <img 
-                    src={message.imageUrl} 
-                    alt="Robot" 
-                    className="rounded-lg w-auto shadow-lg border border-white/10 transition-all duration-300 hover:scale-105" 
-                    style={{ maxHeight: '260px' }} 
-                  />
-                  
-                  {message.robotData && (
-                    <button 
-                      onClick={() => handleAddToProject(message.robotData!)}
-                      className="absolute top-2 right-2 p-2 bg-blue-600 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-blue-700"
-                      title="Add to project"
-                    >
-                      <FolderPlus size={20} />
-                    </button>
-                  )}
+              {message.robotData && (
+                <div className="mt-3">
+                  {/* Carousel-style robot card */}
+                  <div className="carousel-item flex-shrink-0 cursor-pointer relative hover:z-10 w-full max-w-[260px]">
+                    <div className="relative rounded-md w-full h-full group/item">
+                      {/* Image container with darker overlay on hover */}
+                      <div className="rounded-md overflow-hidden w-full h-full bg-black">
+                        <img 
+                          src={message.robotData.imageUrl} 
+                          alt={message.robotData.title} 
+                          className="w-full h-full object-cover rounded-md transition-all duration-300 group-hover/item:brightness-90" 
+                          style={{
+                            aspectRatio: '0.8',
+                            maxHeight: '260px'
+                          }} 
+                        />
+                      </div>
+                      {/* Archive button */}
+                      <div className="absolute top-4 right-4 p-2 z-20 invisible group-hover/item:visible" onClick={e => handleArchiveClick(e, message.robotData!)}>
+                        <Archive size={24} className={cn("transition-colors duration-300", isInMyList(message.robotData.id) ? "fill-blue-400 text-blue-400" : "text-white hover:text-blue-400")} />
+                      </div>
+                      {/* Title overlay - visible on hover without gradient */}
+                      <div className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
+                        <h3 className="text-gray-400 text-2xl font-bold drop-shadow-xl">{message.robotData.title}</h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
