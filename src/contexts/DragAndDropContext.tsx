@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 
-import { processDroppedFiles } from "@/lib/urdfDragAndDrop";
+import { processDroppedFiles } from "@/lib/UrdfDragAndDrop";
 import { useUrdf } from "@/hooks/useUrdf";
 
 export type DragAndDropContextType = {

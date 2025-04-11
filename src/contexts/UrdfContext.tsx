@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { toast } from "sonner";
 import { useUrdfParser } from "@/hooks/useUrdfParser";
-import { UrdfProcessor, readUrdfFileContent } from "@/lib/urdfDragAndDrop";
+import { UrdfProcessor, readUrdfFileContent } from "@/lib/UrdfDragAndDrop";
 import { UrdfData, UrdfFileModel } from "@/lib/types";
 import { useDefaultRobotData } from "@/hooks/useDefaultRobotData";
 
