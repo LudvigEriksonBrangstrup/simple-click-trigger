@@ -2,8 +2,9 @@
 import React from "react";
 import { contentItems } from "../data/content";
 import Header from "../components/Header";
-import ContentCarousel from "../components/ContentCarousel";
+import Carousel from "../components/Carousel";
 import TeamSection from "../components/TeamSection";
+import { ContentItem } from "../types/content";
 
 const Explore: React.FC = () => {
   // Group content items by categories
@@ -15,7 +16,7 @@ const Explore: React.FC = () => {
       acc[category].push(item);
     });
     return acc;
-  }, {} as Record<string, typeof contentItems>);
+  }, {} as Record<string, ContentItem[]>);
 
   // Get unique categories
   const uniqueCategories = Object.keys(categorizedContent).sort();
@@ -55,34 +56,11 @@ const Explore: React.FC = () => {
                 <h2 className="text-3xl font-bold mb-8 text-netflix-text text-glow capitalize">
                   {category}
                 </h2>
-                <div className="glass-panel p-6 rounded-xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {categorizedContent[category].map((item) => (
-                      <div
-                        key={item.id}
-                        className="bg-black/40 hover:bg-black/60 transition-all duration-300 rounded-lg overflow-hidden"
-                      >
-                        <img
-                          src={item.imageUrl}
-                          alt={item.title}
-                          className="w-full h-48 object-cover"
-                        />
-                        <div className="p-4">
-                          <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                          <p className="text-gray-300 text-sm">
-                            {item.description}
-                          </p>
-                          <a
-                            href={`/content/${item.id}`}
-                            className="mt-4 inline-block bg-sidebar-accent px-4 py-2 rounded text-white font-semibold text-sm hover:bg-opacity-80 transition-colors"
-                          >
-                            View Details
-                          </a>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <Carousel 
+                  title={category} 
+                  items={categorizedContent[category]} 
+                  className="glass-panel p-6 rounded-xl"
+                />
               </section>
             ))}
           </div>
