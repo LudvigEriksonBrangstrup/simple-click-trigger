@@ -1,15 +1,17 @@
 
-import ClickCounter from "@/components/ClickCounter";
+import React from 'react';
+import Layout from '@/components/layout/Layout';
 
-const Index = () => {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm">
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">The Button</h1>
-        <ClickCounter />
-      </div>
-    </div>
-  );
+// This is needed to make TypeScript recognize webkitdirectory as a valid attribute
+declare module 'react' {
+  interface InputHTMLAttributes<T> extends React.HTMLAttributes<T> {
+    directory?: string;
+    webkitdirectory?: string;
+  }
+}
+
+const Index: React.FC = () => {
+  return <Layout />;
 };
 
 export default Index;
