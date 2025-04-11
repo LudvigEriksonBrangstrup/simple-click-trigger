@@ -69,9 +69,7 @@ const IndexCopy: React.FC = () => {
         <div className="relative z-10">
           {/* Chat Window Section */}
           <section className="mb-60 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-netflix-text text-center">
-              Talk to Our AI Assistant
-            </h2>
+            <h2 className="text-3xl font-bold mb-6 text-netflix-text text-center">Chat with Agent</h2>
             <div className="glass-panel">
               <ChatWindow />
             </div>
