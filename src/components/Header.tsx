@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Star, Home, Compass } from 'lucide-react';
-
 const Header: React.FC = () => {
-  return (
-    <header className="bg-black/90 backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-50 shadow-lg border-b border-white/5">
+  return <header className="bg-black/90 backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-50 shadow-lg border-b border-white/5">
       <div className="flex items-center">
         <Link to="/" className="text-white font-bold text-3xl tracking-wider mr-8 hover:text-blue-400 transition-colors">
           QUALIA STUDIOS
@@ -21,7 +18,7 @@ const Header: React.FC = () => {
           </Link>
           <Link to="/my-list" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm">
             <Star size={16} />
-            <span>Starred</span>
+            <span>Projects</span>
           </Link>
         </nav>
       </div>
@@ -32,8 +29,6 @@ const Header: React.FC = () => {
         </button>
         <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md transition-transform hover:scale-110 cursor-pointer"></div>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
