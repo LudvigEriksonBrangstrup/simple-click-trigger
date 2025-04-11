@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
     name: "Fabian",
     role: "UX Designer",
     imageUrl: "/lovable-uploads/e6f4bf50-ed44-4ce7-9fab-ff8a9476b584.png",
-    bio: "Fabian is a cracked engineer who creates intuitive user experiences."
+    bio: "Fabian is an almost cracked engineer who creates intuitive user experiences."
   }
 ];
 
