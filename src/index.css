@@ -1,264 +1,162 @@
-/* Import JetBrains Mono font from Google Fonts - a clean monospace font good for code */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* Include Tailwind's base styles, component classes, and utility classes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  @layer base - This adds styles to Tailwind's 'base' layer
-  These CSS variables define the color palette for the entire application
-  The format is: --name: hue saturation lightness;
-  This makes it easy to reference colors using hsl(var(--name))
-*/
 @layer base {
   :root {
-    /* Light mode color scheme */
-    --background: 0 0% 100%;            /* Pure white background */
-    --foreground: 222.2 84% 4.9%;       /* Very dark blue-gray text */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;                  /* White card backgrounds */
-    --card-foreground: 222.2 84% 4.9%;  /* Dark text on cards */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 100%;               /* White popover backgrounds */
-    --popover-foreground: 222.2 84% 4.9%; /* Dark text on popovers */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 100% 50%;            /* Bright blue for primary elements */
-    --primary-foreground: 210 40% 98%;  /* Very light blue text on primary elements */
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;         /* Light blue-gray for secondary elements */
-    --secondary-foreground: 222.2 47.4% 11.2%; /* Dark text on secondary elements */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;             /* Light blue-gray for muted elements */
-    --muted-foreground: 215.4 16.3% 46.9%; /* Medium gray text for muted elements */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;            /* Light blue-gray for accents */
-    --accent-foreground: 222.2 47.4% 11.2%; /* Dark text on accents */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%;       /* Red for destructive actions */
-    --destructive-foreground: 210 40% 98%; /* Light text on destructive elements */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;        /* Light gray for borders */
-    --input: 214.3 31.8% 91.4%;         /* Light gray for input elements */
-    --ring: 222.2 84% 4.9%;             /* Dark color for focus rings */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
-    --radius: 0.75rem;                  /* Default border radius */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 222.2 47.4% 11.2%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 222.2 47.4% 11.2%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 222.2 84% 4.9%;
 
-    /* Sidebar-specific colors for a distinct sidebar appearance */
-    --sidebar-background: 210 50% 98%;  /* Very light blue background */
-    --sidebar-foreground: 220 40% 20%;  /* Dark blue-gray text */
-    --sidebar-primary: 210 100% 50%;    /* Bright blue for primary sidebar elements */
-    --sidebar-primary-foreground: 0 0% 100%; /* White text on primary sidebar elements */
-    --sidebar-accent: 210 40% 95%;      /* Light blue-gray for sidebar accents */
-    --sidebar-accent-foreground: 220 40% 20%; /* Dark text on sidebar accents */
-    --sidebar-border: 214.3 31.8% 91.4%; /* Light gray for sidebar borders */
-    --sidebar-ring: 217.2 91.2% 59.8%;  /* Blue for sidebar focus rings */
+    --radius: 0.5rem;
   }
 
-  /* Dark mode color scheme - applied when .dark class is present on an ancestor */
   .dark {
-    --background: 222.2 84% 4.9%;       /* Very dark blue-gray background */
-    --foreground: 210 40% 98%;          /* Very light blue text */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;             /* Dark card backgrounds */
-    --card-foreground: 210 40% 98%;     /* Light text on cards */
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;          /* Dark popover backgrounds */
-    --popover-foreground: 210 40% 98%;  /* Light text on popovers */
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 50%;            /* Same bright blue for primary elements */
-    --primary-foreground: 0 0% 100%;    /* White text on primary elements */
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;     /* Dark blue-gray for secondary elements */
-    --secondary-foreground: 210 40% 98%; /* Light text on secondary elements */
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;         /* Dark blue-gray for muted elements */
-    --muted-foreground: 215 20.2% 65.1%; /* Light gray text for muted elements */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;        /* Dark blue-gray for accents */
-    --accent-foreground: 210 40% 98%;   /* Light text on accents */
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;       /* Darker red for destructive actions */
-    --destructive-foreground: 210 40% 98%; /* Light text on destructive elements */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;        /* Dark gray for borders */
-    --input: 217.2 32.6% 17.5%;         /* Dark gray for input elements */
-    --ring: 212.7 26.8% 83.9%;          /* Light color for focus rings */
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
 
-    /* Dark mode sidebar-specific colors */
-    --sidebar-background: 222.2 47.4% 11.2%; /* Dark blue-gray background */
-    --sidebar-foreground: 210 40% 98%;  /* Light text */
-    --sidebar-primary: 210 100% 50%;    /* Same bright blue for primary sidebar elements */
-    --sidebar-primary-foreground: 0 0% 100%; /* White text on primary sidebar elements */
-    --sidebar-accent: 217.2 32.6% 17.5%; /* Dark blue-gray for sidebar accents */
-    --sidebar-accent-foreground: 210 40% 98%; /* Light text on sidebar accents */
-    --sidebar-border: 217.2 32.6% 17.5%; /* Dark gray for sidebar borders */
-    --sidebar-ring: 210 40% 98%;        /* Light color for sidebar focus rings */
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 212.7 26.8% 83.9%;
   }
 }
 
-/* Additional base styles and utility classes */
 @layer base {
-  /* Apply border color to all elements with borders */
   * {
     @apply border-border;
   }
-
-  /* Set default background and text colors for the body */
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1; /* Enable font ligatures and contextual alternates */
-    font-family: 'Inter', sans-serif;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0);
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-  }
-
-  /* Apply JetBrains Mono font to elements with .font-mono class */
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  /* Subtle drop shadow effect */
-  .drop-shadow-subtle {
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
-  }
-
-  /* Glass-like panel with transparency and blur effect */
-  .glass-panel {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl drop-shadow-subtle overflow-hidden;
-  }
-
-  /* Scale effect on hover */
-  .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
-  }
-
-  /* Card style for parameter or settings panels */
-  .parameter-card {
-    @apply bg-white/10 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg border border-white/10 dark:border-gray-700/40 transition-all duration-300 hover:shadow-md;
-  }
-
-  /* Horizontal divider for sidebar sections */
-  .sidebar-divider {
-    @apply h-px w-full bg-gray-200 dark:bg-gray-700 my-4;
-  }
-
-  /* Container for sidebar sections with bottom padding */
-  .sidebar-section {
-    @apply pb-5;
-  }
-  
-  /* Custom scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4);
-  }
-  
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-none {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Text gradients */
-  .text-gradient-white {
-    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
-  }
-
-  /* Cosmic background with stars */
-  .stars {
-    background-image: 
-      radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 160px 120px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 230px 190px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 270px 220px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 340px 280px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 410px 320px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 480px 390px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 550px 440px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 620px 490px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 690px 540px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 760px 590px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 830px 640px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 900px 690px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 970px 740px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 1040px 790px, #fff, rgba(0,0,0,0)),
-      radial-gradient(2px 2px at 1110px 840px, #fff, rgba(0,0,0,0)),
-      radial-gradient(1px 1px at 1180px 890px, #fff, rgba(0,0,0,0));
-    background-size: 1200px 1000px;
-    background-repeat: repeat;
-    animation: stars-animation 100s linear infinite;
-  }
-
-  @keyframes stars-animation {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 1200px 1000px;
-    }
-  }
-  
-  /* Apple-style category sections */
-  .category-section {
-    padding: 5vh 0;
-    position: relative;
-  }
-  
-  .category-section.in-view {
-    opacity: 1;
-  }
-  
-  .category-title {
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
-    will-change: auto;
-  }
-  
-  /* Constant glow for subheaders */
-  .text-glow {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-    will-change: auto;
   }
 }
 
-/* Animation utilities */
 @layer utilities {
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fade-in 0.5s forwards;
   }
-  
-  @keyframes fadeIn {
+
+  .text-glow {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  }
+
+  .glass-panel {
+    background: rgba(15, 15, 25, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-gradient-white {
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(15px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  .cosmic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='1' fill='white' /%3E%3C/svg%3E") repeat;
+    opacity: 0.4;
+    animation: twinkle 6s linear infinite;
+  }
+
+  @keyframes twinkle {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.4;
     }
   }
 }

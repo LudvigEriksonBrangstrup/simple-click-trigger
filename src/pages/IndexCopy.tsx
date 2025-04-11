@@ -1,8 +1,10 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
 import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
+import TeamSection from "../components/TeamSection";
 
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
@@ -30,34 +32,6 @@ const IndexCopy: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // // Apply parallax transformations based on scroll position
-  // useEffect(() => {
-  //   // Simple parallax for hero section
-  //   if (parallaxRef.current) {
-  //     parallaxRef.current.style.transform = `translateY(${scrollY * 0.3}px)`;
-  //   }
-
-  //   // Simplified parallax for category sections
-  //   sectionRefs.current.forEach((section, index) => {
-  //     if (!section) return;
-
-  //     const rect = section.getBoundingClientRect();
-  //     const windowHeight = window.innerHeight;
-
-  //     if (rect.top < windowHeight && rect.bottom > 0) {
-  //       // Simplified calculation - smoother and less resource-intensive
-  //       const sectionProgress = 1 - rect.top / windowHeight;
-  //       const transformValue = Math.min(100, sectionProgress * 120);
-
-  //       // Reduced complexity, still gives parallax effect
-  //       const indexOffset = index * 10;
-  //       section.style.transform = `translateY(${
-  //         transformValue + indexOffset
-  //       }px)`;
-  //     }
-  //   });
-  // }, [scrollY]);
 
   return (
     <div className="min-h-screen bg-netflix-background text-netflix-text">
@@ -105,6 +79,9 @@ const IndexCopy: React.FC = () => {
               <ChatWindow />
             </div>
           </section>
+
+          {/* Team Section */}
+          <TeamSection />
 
           <div className="space-y-20 mt-12">
             {/* Increased spacing between categories for parallax effect */}
