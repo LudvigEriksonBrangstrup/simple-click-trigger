@@ -26,10 +26,7 @@ const Header: React.FC = () => {
         </nav>
       </div>
       <div className="flex items-center space-x-6">
-        <button className="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
-          <Search size={18} />
-          <span className="text-sm hidden sm:inline">Search</span>
-        </button>
+        
         <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md transition-transform hover:scale-110 cursor-pointer"></div>
       </div>
     </header>;
