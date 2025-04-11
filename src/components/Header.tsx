@@ -54,8 +54,8 @@ const Header: React.FC = () => {
           <DropdownMenuContent align="end" className="w-56 bg-zinc-900 border-zinc-800 text-white">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">Lovable AI</p>
-                <p className="text-xs leading-none text-zinc-400">your.account@example.com</p>
+                <p className="text-sm font-medium leading-none">Victor</p>
+                <p className="text-xs leading-none text-zinc-400">Victor@loveslogin.com</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-zinc-800" />
