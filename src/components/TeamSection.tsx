@@ -55,7 +55,11 @@ const TeamSection: React.FC = () => {
             <Card key={member.id} className="glass-panel hover:shadow-glow transition-all duration-300 transform hover:-translate-y-1">
               <CardContent className="pt-6 text-center">
                 <Avatar className="h-32 w-32 mx-auto mb-4 border-2 border-white/20">
-                  <AvatarImage src={member.imageUrl} alt={member.name} />
+                  <AvatarImage 
+                    src={member.imageUrl} 
+                    alt={member.name} 
+                    className="filter grayscale" 
+                  />
                   <AvatarFallback className="text-2xl">{member.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-xl font-bold mb-1">{member.name}</h3>
