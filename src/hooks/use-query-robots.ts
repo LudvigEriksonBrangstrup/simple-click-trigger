@@ -36,7 +36,7 @@ export function useQueryRobots(categoryId?: string) {
             } else {
               // If it's a storage path, construct the public URL using the correct bucket name
               const { data } = supabase.storage
-                .from('robotspicturesbucket')  // Use the correct bucket name
+                .from('robotspicturesbucket')  // Using the exact bucket name 'robotspicturesbucket'
                 .getPublicUrl(robot.image_uri);
                 
               if (data && data.publicUrl) {

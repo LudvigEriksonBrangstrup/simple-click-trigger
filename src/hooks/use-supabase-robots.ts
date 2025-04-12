@@ -24,15 +24,34 @@ export function useSupabaseRobots() {
         
         if (data) {
           // Map Supabase data to our ContentItem format
-          const mappedRobots = data.map(robot => ({
-            id: robot.id,
-            title: robot.name,
-            // Use image_uri from Supabase or fall back to placeholder
-            imageUrl: robot.image_uri || '/placeholder.svg',
-            description: robot.summary || `A ${robot.type || 'robot'} created by ${robot.maker || 'unknown maker'}.`,
-            categories: robot.tags || ['trending'],
-            urdfPath: robot.urdf_uri || '',
-          }));
+          const mappedRobots = data.map(robot => {
+            let imageUrl = '/placeholder.svg';
+            
+            if (robot.image_uri) {
+              // If image_uri is already a complete URL, use it directly
+              if (robot.image_uri.startsWith('http')) {
+                imageUrl = robot.image_uri;
+              } else {
+                // If it's a storage path, construct the public URL using the correct bucket name
+                const { data } = supabase.storage
+                  .from('robotspicturesbucket')  // Using the exact bucket name 'robotspicturesbucket'
+                  .getPublicUrl(robot.image_uri);
+                  
+                if (data && data.publicUrl) {
+                  imageUrl = data.publicUrl;
+                }
+              }
+            }
+            
+            return {
+              id: robot.id,
+              title: robot.name,
+              imageUrl: imageUrl,
+              description: robot.summary || `A ${robot.type || 'robot'} created by ${robot.maker || 'unknown maker'}.`,
+              categories: robot.tags || ['trending'],
+              urdfPath: robot.urdf_uri || '',
+            };
+          });
           
           setRobots(mappedRobots);
           console.log('Fetched robots from Supabase:', mappedRobots);
