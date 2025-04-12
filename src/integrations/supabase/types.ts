@@ -9,6 +9,30 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      state: {
+        Row: {
+          error: string | null
+          messages: Json
+          robot_matches: Json | null
+          session_id: string
+          status: string | null
+        }
+        Insert: {
+          error?: string | null
+          messages: Json
+          robot_matches?: Json | null
+          session_id?: string
+          status?: string | null
+        }
+        Update: {
+          error?: string | null
+          messages?: Json
+          robot_matches?: Json | null
+          session_id?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
       urdf: {
         Row: {
           dof: number | null

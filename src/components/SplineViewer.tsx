@@ -1,14 +1,21 @@
 
-import React, { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 
 interface SplineViewerProps {
   splineUrl: string;
   className?: string;
+  scale?: number; // Added scale prop
 }
 
-const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }) => {
+const SplineViewer: React.FC<SplineViewerProps> = ({ 
+  splineUrl, 
+  className = '',
+  scale = 1 // Default scale is 1
+}) => {
   const splineRef = useRef<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   // Handle keyboard events
   useEffect(() => {
@@ -71,13 +78,38 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
     // Store reference to the Spline app instance
     splineRef.current = splineApp;
     console.log('Spline scene loaded successfully');
+    setIsLoading(false);
+  };
+
+  const handleError = (error: Error) => {
+    console.error('Error loading Spline scene:', error);
+    setHasError(true);
+    setIsLoading(false);
+  };
+
+  // Apply transform scale based on the scale prop
+  const containerStyle = {
+    transform: `scale(${scale})`,
+    transformOrigin: 'center center',
   };
 
   return (
-    <div className={`w-full ${className}`}>
-      <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}>
-        <Spline scene={splineUrl} onLoad={onLoad} />
-      </Suspense>
+    <div className={`w-full ${className}`} style={containerStyle}>
+      {isLoading && (
+        <div className="w-full h-full flex items-center justify-center text-white opacity-60">
+          Loading 3D model...
+        </div>
+      )}
+      
+      {hasError ? (
+        <div className="w-full h-full flex items-center justify-center text-white bg-red-900/20 rounded-lg p-4">
+          Failed to load 3D model. Please try again later.
+        </div>
+      ) : (
+        <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}>
+          <Spline scene={splineUrl} onLoad={onLoad} onError={handleError} />
+        </Suspense>
+      )}
     </div>
   );
 };
