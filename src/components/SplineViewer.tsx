@@ -1,5 +1,6 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
+import Spline from '@splinetool/react-spline';
 
 interface SplineViewerProps {
   splineUrl: string;
@@ -7,40 +8,76 @@ interface SplineViewerProps {
 }
 
 const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const splineRef = useRef<any>(null);
 
+  // Handle keyboard events
   useEffect(() => {
-    // Dynamically load the spline-viewer script
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
-    script.type = 'module';
-    document.head.appendChild(script);
-
-    // Clean up on unmount
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && splineRef.current) {
+        try {
+          console.log('Enter key pressed, attempting to trigger animation');
+          
+          // Access the Spline app instance
+          const app = splineRef.current;
+          
+          // Simple event broadcast - this is the safest approach
+          // as it doesn't depend on specific API methods that might not exist
+          if (app) {
+            // Try multiple approaches to trigger animations
+            
+            // Method 1: Try to emit a general event
+            try {
+              if (typeof app.emitEvent === 'function') {
+                app.emitEvent('keyDown', { key: 'Enter' });
+                console.log('Emitted keyDown event to Spline scene');
+              }
+            } catch (e) {
+              console.log('Method 1 failed:', e);
+            }
+            
+            // Method 2: Try to trigger a specific event on the scene
+            try {
+              if (app.triggerEvent) {
+                app.triggerEvent('keypress', { key: 'Enter' });
+                console.log('Triggered keypress event on scene');
+              }
+            } catch (e) {
+              console.log('Method 2 failed:', e);
+            }
+            
+            // Method 3: Try accessing the runtime directly if available
+            try {
+              if (app.runtime && app.runtime.trigger) {
+                app.runtime.trigger('keydown', { key: 'Enter' });
+                console.log('Triggered keydown event via runtime');
+              }
+            } catch (e) {
+              console.log('Method 3 failed:', e);
+            }
+          }
+        } catch (error) {
+          console.error('Error triggering Spline animation:', error);
+        }
       }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      // Clear previous content
-      containerRef.current.innerHTML = '';
-      
-      // Create and append the spline-viewer element
-      const splineViewer = document.createElement('spline-viewer');
-      splineViewer.setAttribute('url', splineUrl);
-      splineViewer.style.width = '100%';
-      splineViewer.style.height = '100%';
-      containerRef.current.appendChild(splineViewer);
-    }
-  }, [splineUrl, containerRef]);
+  const onLoad = (splineApp: any) => {
+    // Store reference to the Spline app instance
+    splineRef.current = splineApp;
+    console.log('Spline scene loaded successfully');
+  };
 
   return (
-    <div ref={containerRef} className={`w-full h-full ${className}`}>
-      {/* spline-viewer will be dynamically inserted here */}
+    <div className={`w-full ${className}`}>
+      <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}>
+        <Spline scene={splineUrl} onLoad={onLoad} />
+      </Suspense>
     </div>
   );
 };
