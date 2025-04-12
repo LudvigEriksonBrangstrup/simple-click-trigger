@@ -1,27 +1,53 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { contentItems } from '../data/content';
-import { Send, Archive } from 'lucide-react';
+import { Send, Archive, Database, Globe, Brain } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import ProjectSelector from './ProjectSelector';
 import { ContentItem } from '@/types/content';
 import { useMyList } from '@/hooks/use-my-list';
 import { cn } from '@/lib/utils';
 
+// Available tool types
+const TOOLS = ['database', 'internet', 'thinking'] as const;
+type ToolType = typeof TOOLS[number];
+
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<{
     sender: string;
     text: string;
     robotData?: ContentItem;
+    tool?: ToolType;
   }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [toolLoading, setToolLoading] = useState<ToolType | null>(null);
   const [isProjectSelectorOpen, setIsProjectSelectorOpen] = useState(false);
   const [selectedRobot, setSelectedRobot] = useState<ContentItem | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const { isInMyList } = useMyList();
 
+  const getRandomTool = (): ToolType => {
+    const randomIndex = Math.floor(Math.random() * TOOLS.length);
+    return TOOLS[randomIndex];
+  };
+
   const fetchLLMResponseChunked = async (userMessage: string, onChunk: (chunk: string) => void): Promise<void> => {
+    // Randomly decide if we should show a tool call for this message
+    const shouldUseTool = Math.random() > 0.3; // 70% chance of using a tool
+    
+    if (shouldUseTool) {
+      const tool = getRandomTool();
+      setToolLoading(tool);
+      
+      // Simulate tool call with a 4-second delay
+      await new Promise(resolve => setTimeout(resolve, 4000));
+      setToolLoading(null);
+      
+      // Add tool information to the first chunk
+      onChunk(`__TOOL__${tool}`);
+    }
+    
     // Use contentItems instead of hardcoded movies
     let selectedItem;
     if (userMessage.toLowerCase().includes("construction")) {
@@ -76,6 +102,9 @@ const ChatWindow: React.FC = () => {
               if (robot) {
                 lastMessage.robotData = robot;
               }
+            } else if (chunk.startsWith('__TOOL__')) {
+              const tool = chunk.replace('__TOOL__', '') as ToolType;
+              lastMessage.tool = tool;
             } else {
               lastMessage.text += chunk;
             }
@@ -100,13 +129,39 @@ const ChatWindow: React.FC = () => {
     setSelectedRobot(null);
   };
 
+  const getToolIcon = (tool: ToolType) => {
+    switch (tool) {
+      case 'database':
+        return <Database size={16} className="mr-2 text-blue-400" />;
+      case 'internet':
+        return <Globe size={16} className="mr-2 text-green-400" />;
+      case 'thinking':
+        return <Brain size={16} className="mr-2 text-purple-400" />;
+      default:
+        return null;
+    }
+  };
+
+  const getToolDescription = (tool: ToolType) => {
+    switch (tool) {
+      case 'database':
+        return "Fetching from database";
+      case 'internet':
+        return "Searching the internet";
+      case 'thinking':
+        return "Thinking deeply";
+      default:
+        return "";
+    }
+  };
+
   useEffect(() => {
     if (chatContainerRef.current) {
       setTimeout(() => {
         chatContainerRef.current!.scrollTop = chatContainerRef.current!.scrollHeight;
       }, 50); // Add a slight delay to ensure the DOM is updated
     }
-  }, [messages]);
+  }, [messages, toolLoading]);
 
   return (
     <div className="flex flex-col h-full bg-transparent text-white">
@@ -129,6 +184,13 @@ const ChatWindow: React.FC = () => {
                   {message.sender === 'User' ? 'You' : 'Assistant'}
                 </span>
               </div>
+              
+              {message.tool && (
+                <div className="flex items-center text-xs text-gray-400 mb-2">
+                  {getToolIcon(message.tool)}
+                  <span>Used tool: {getToolDescription(message.tool)}</span>
+                </div>
+              )}
               
               <span 
                 className={`inline-block px-4 py-3 rounded-lg ${
@@ -184,6 +246,15 @@ const ChatWindow: React.FC = () => {
               </span>
             </div>
           )}
+          
+          {toolLoading && (
+            <div className="text-left mt-2 mb-4">
+              <div className="flex items-center text-sm text-gray-400 animate-pulse">
+                {getToolIcon(toolLoading)}
+                <span>{getToolDescription(toolLoading)}...</span>
+              </div>
+            </div>
+          )}
         </div>
       </ScrollArea>
       
@@ -211,7 +282,7 @@ const ChatWindow: React.FC = () => {
           <button 
             onClick={handleSend} 
             className="absolute right-2 bottom-2 p-2.5 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
-            disabled={loading}
+            disabled={loading || toolLoading !== null}
           >
             <Send size={18} className="text-white" />
           </button>
