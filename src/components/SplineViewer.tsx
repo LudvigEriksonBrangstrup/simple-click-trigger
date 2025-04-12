@@ -11,6 +11,15 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
   const splineRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 2;
+
+  // Reset error state when URL changes
+  useEffect(() => {
+    setHasError(false);
+    setIsLoading(true);
+    setRetryCount(0);
+  }, [splineUrl]);
 
   // Handle keyboard events
   useEffect(() => {
@@ -79,8 +88,20 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
 
   const onError = (error: any) => {
     console.error('Error loading Spline scene:', error);
-    setIsLoading(false);
-    setHasError(true);
+    
+    // Try to retry loading a few times before giving up
+    if (retryCount < maxRetries) {
+      console.log(`Retrying Spline load (${retryCount + 1}/${maxRetries})...`);
+      setRetryCount(prev => prev + 1);
+      // Force remount of Spline component
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      setIsLoading(false);
+      setHasError(true);
+    }
   };
 
   // Fallback 3D placeholder when there's an error
@@ -93,6 +114,16 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
         There was an issue loading the 3D scene. This could be due to network issues, 
         access restrictions, or the model may not be available.
       </div>
+      <button 
+        onClick={() => {
+          setHasError(false);
+          setIsLoading(true);
+          setRetryCount(0);
+        }}
+        className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+      >
+        Try Again
+      </button>
     </div>
   );
 
@@ -114,11 +145,13 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
         <ErrorFallback />
       ) : (
         <Suspense fallback={<LoadingState />}>
-          <Spline 
-            scene={splineUrl} 
-            onLoad={onLoad} 
-            onError={onError}
-          />
+          {!isLoading && (
+            <Spline 
+              scene={splineUrl} 
+              onLoad={onLoad} 
+              onError={onError}
+            />
+          )}
         </Suspense>
       )}
     </div>

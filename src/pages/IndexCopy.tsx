@@ -66,10 +66,10 @@ const IndexCopy: React.FC = () => {
                 <span className="block text-gradient-white pb-4">AGENTS</span>
               </h1>
               
-              {/* Spline 3D Asset with updated URL and increased height */}
+              {/* Spline 3D Asset with verified URL and increased height */}
               <div className="w-full h-[600px] md:h-[800px] relative -mt-20 z-0 overflow-visible">
                 <SplineViewer 
-                  splineUrl="https://my.spline.design/untitled-41c15b71d723078b8d04f280b68ba50d/" 
+                  splineUrl="https://prod.spline.design/bQEgOS1kwR9CyWb3/scene.splinecode" 
                   className="h-full overflow-visible"
                 />
               </div>
