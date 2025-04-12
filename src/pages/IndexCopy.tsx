@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
 import SplineViewer from "../components/SplineViewer";
+import { GooeyTextDemo } from "../components/GooeyTextDemo";
 
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
@@ -57,11 +58,8 @@ const IndexCopy: React.FC = () => {
           <div className="w-full relative mb-8 flex items-start justify-center">
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
-              <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
-                
-                
-                
-              </h1>
+              {/* GooeyText animation */}
+              <GooeyTextDemo />
               
               {/* Spline 3D Asset with increased width and no overflow cutting */}
               <div className="w-full md:w-[120%] lg:w-[140%] mx-auto md:-mx-[10%] lg:-mx-[20%] h-[400px] relative -mt-20 z-0 overflow-visible">
