@@ -165,9 +165,9 @@ const ChatWindow: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full bg-transparent text-white">
-      {/* Messages area */}
-      <ScrollArea className="flex-1 px-4 py-4 overflow-y-auto">
-        <div ref={chatContainerRef}>
+      {/* Messages area with fixed max height */}
+      <ScrollArea className="flex-1 px-4 py-4 overflow-y-auto max-h-[500px]">
+        <div ref={chatContainerRef} className="h-full">
           {messages.length === 0 && (
             <div className="text-center py-8 text-gray-400 italic">
               Describe what you need a robot for, and I'll help you find the perfect fit for your needs.
