@@ -57,9 +57,9 @@ const IndexCopy: React.FC = () => {
             {/* Text container - absolute width limit, fixed to left side */}
             <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden">
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
-                <span className="block text-gradient-white text-9xl">PROMPT</span>
-                <span className="block text-gradient-white text-9xl">SPATIAL</span>
-                <span className="block text-gradient-white text-9xl">AGENTS</span>
+                <span className="block text-gradient-white text-9xl px-[8px]">PROMPT</span>
+                <span className="block text-gradient-white text-9xl mx-[16px]">SPATIAL</span>
+                <span className="block text-gradient-white text-9xl mx-[12px]">AGENTS</span>
               </h1>
             </div>
             
