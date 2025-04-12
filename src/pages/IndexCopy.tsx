@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
@@ -5,6 +6,7 @@ import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
 import SplineViewer from "../components/SplineViewer";
+
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -61,9 +63,9 @@ const IndexCopy: React.FC = () => {
                 
               </h1>
               
-              {/* Spline 3D Asset with increased height and no overflow cutting */}
-              <div className="w-full h-[400px] relative -mt-20 z-0 overflow-visible">
-                <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full overflow-visible" />
+              {/* Spline 3D Asset with increased width and no overflow cutting */}
+              <div className="w-full md:w-[120%] lg:w-[140%] mx-auto md:-mx-[10%] lg:-mx-[20%] h-[400px] relative -mt-20 z-0 overflow-visible">
+                <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full overflow-visible" />
               </div>
             </div>
           </div>
