@@ -57,7 +57,7 @@ const IndexCopy: React.FC = () => {
           {/* Create a grid layout to ensure separation */}
           <div className="flex flex-col md:flex-row items-center md:items-start relative">
             {/* Text container - absolute width limit, fixed to left side */}
-            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden relative z-10">
+            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden relative z-50">
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
                 <span className="block text-gradient-white text-9xl px-[8px]">PROMPT</span>
                 <span className="block text-gradient-white text-9xl mx-[16px]">SPATIAL</span>
