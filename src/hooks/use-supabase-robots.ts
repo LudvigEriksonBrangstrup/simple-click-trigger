@@ -30,7 +30,7 @@ export function useSupabaseRobots() {
             // Use image_uri from Supabase or fall back to placeholder
             imageUrl: robot.image_uri || '/placeholder.svg',
             description: robot.summary || `A ${robot.type || 'robot'} created by ${robot.maker || 'unknown maker'}.`,
-            categories: robot.tags || ['trending'], // Use the tags from the database as categories
+            categories: robot.tags || ['trending'],
             urdfPath: robot.urdf_uri || '',
           }));
           

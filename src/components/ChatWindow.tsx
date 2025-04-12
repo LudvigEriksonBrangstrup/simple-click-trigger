@@ -99,7 +99,7 @@ const ChatWindow: React.FC = () => {
           if (lastMessage.sender === 'Bot') {
             if (chunk.startsWith('__DATA__')) {
               const robotId = chunk.replace('__DATA__', '');
-              const robot = contentItems.find(item => item.id === robotId);
+              const robot = robots.find(item => item.id === robotId);
               if (robot) {
                 lastMessage.robotData = robot;
               }
