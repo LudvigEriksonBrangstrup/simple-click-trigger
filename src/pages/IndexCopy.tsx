@@ -55,9 +55,9 @@ const IndexCopy: React.FC = () => {
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with parallax text */}
         <section className="relative overflow-visible">
-          <div className="w-full relative mb-8 flex flex-col md:flex-row items-center justify-between">
-            {/* Parallax text container - moved back to the left */}
-            <div className="relative z-10 text-left px-0 md:px-0 max-w-5xl mt-24 pt-16 md:w-1/2">
+          <div className="w-full relative mb-8 flex flex-col md:flex-row items-center">
+            {/* Text container - kept strictly to the left */}
+            <div className="relative z-20 text-left px-0 max-w-[45%] mt-24 pt-16 md:w-[45%]">
               <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
                 <span className="block -mb-12 text-gradient-white">PROMPT</span>
                 <span className="block -mb-12 text-gradient-white">
@@ -67,8 +67,12 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* Completely invisible container for Spline asset - just the model with no background */}
-            <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[55%] h-[400px] w-full relative mt-8 md:mt-0 z-10" style={{ background: 'transparent', pointerEvents: 'auto' }}>
+            {/* Spline container positioned to not overlap with text */}
+            <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[50%] h-[400px] w-full relative mt-8 md:mt-0 z-10" 
+                 style={{ 
+                   background: 'transparent',
+                   pointerEvents: 'auto'
+                 }}>
               <SplineViewer 
                 splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
                 className="h-full w-full overflow-visible"

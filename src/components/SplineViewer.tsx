@@ -94,7 +94,9 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
     pointerEvents: enableInteraction ? 'auto' as const : 'none' as const,
-    background: 'transparent' // Make sure the background is transparent
+    background: 'transparent', // Ensure background is transparent
+    boxShadow: 'none', // Remove any shadow
+    border: 'none' // Remove any border
   };
 
   return (
