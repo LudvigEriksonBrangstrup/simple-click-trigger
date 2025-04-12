@@ -11,16 +11,26 @@ const NewAndPopular: React.FC = () => {
       <div className="mt-16 p-4">
         <h1 className="text-4xl font-bold mb-4">New & Popular</h1>
         
-        {/* Add Spline Asset with large scale */}
-        <div className="h-[350px] rounded-lg overflow-hidden mb-4">
-          <SplineViewer 
-            splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-            scale={1.8} 
-            enableInteraction={true}
-          />
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
+          {/* Title section */}
+          <div className="md:w-1/2">
+            <h2 className="text-3xl font-semibold mb-4">Featured Model</h2>
+            <p className="text-netflix-text2 mb-6">
+              Explore our latest interactive 3D model. Click and drag to interact with it.
+            </p>
+          </div>
+          
+          {/* Spline Asset with large scale */}
+          <div className="md:w-1/2 h-[350px] rounded-lg overflow-hidden mb-4">
+            <SplineViewer 
+              splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
+              scale={1.8} 
+              enableInteraction={true}
+            />
+          </div>
         </div>
         
-        <div className="h-[500px] rounded-lg overflow-hidden">
+        <div className="h-[400px] rounded-lg overflow-hidden mt-8">
           {/* Pass hasAnimation prop without inputCustomUrdfPath */}
           <URDFViewer hasAnimation={true} />
         </div>
