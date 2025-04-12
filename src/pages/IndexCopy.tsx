@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
 import SplineViewer from "../components/SplineViewer";
-import { GooeyTextDemo } from "../components/GooeyTextDemo";
 
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
@@ -35,6 +34,7 @@ const IndexCopy: React.FC = () => {
 
   // Only get the trending category
   const trendingCategory = categories.find(category => category.id === "trending");
+
   return <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
@@ -58,12 +58,20 @@ const IndexCopy: React.FC = () => {
           <div className="w-full relative mb-8 flex items-start justify-center">
             {/* Parallax text container */}
             <div className="relative z-10 text-left px- md:px-0 max-w-6xl mx-auto mt-24 pt-16">
-              {/* GooeyText animation */}
-              <GooeyTextDemo />
+              <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
+                <span className="block -mb-12 text-gradient-white">PROMPT</span>
+                <span className="block -mb-12 text-gradient-white">
+                  SPATIAL
+                </span>
+                <span className="block text-gradient-white pb-4">AGENTS</span>
+              </h1>
               
-              {/* Spline 3D Asset with increased width and no overflow cutting */}
-              <div className="w-full md:w-[120%] lg:w-[140%] mx-auto md:-mx-[10%] lg:-mx-[20%] h-[400px] relative -mt-20 z-0 overflow-visible">
-                <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full overflow-visible" />
+              {/* Spline 3D Asset with increased height and no overflow cutting */}
+              <div className="w-full h-[400px] relative -mt-20 z-0 overflow-visible">
+                <SplineViewer 
+                  splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
+                  className="h-full overflow-visible"
+                />
               </div>
             </div>
           </div>
@@ -97,4 +105,5 @@ const IndexCopy: React.FC = () => {
       </main>
     </div>;
 };
+
 export default IndexCopy;
