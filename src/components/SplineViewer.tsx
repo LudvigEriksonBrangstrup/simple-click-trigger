@@ -14,18 +14,46 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Enter' && splineRef.current) {
-        // Try to trigger animation when Enter is pressed
         try {
           console.log('Enter key pressed, attempting to trigger animation');
           
-          // Try different approaches to trigger the animation
+          // Access the Spline app instance
           const app = splineRef.current;
           
-          // Just broadcast an event to the entire scene
-          // This is safer than trying to access specific objects or methods that might not exist
-          if (app && typeof app.emitEvent === 'function') {
-            app.emitEvent('keyDown', { key: 'Enter' });
-            console.log('Emitted keyDown event to Spline scene');
+          // Simple event broadcast - this is the safest approach
+          // as it doesn't depend on specific API methods that might not exist
+          if (app) {
+            // Try multiple approaches to trigger animations
+            
+            // Method 1: Try to emit a general event
+            try {
+              if (typeof app.emitEvent === 'function') {
+                app.emitEvent('keyDown', { key: 'Enter' });
+                console.log('Emitted keyDown event to Spline scene');
+              }
+            } catch (e) {
+              console.log('Method 1 failed:', e);
+            }
+            
+            // Method 2: Try to trigger a specific event on the scene
+            try {
+              if (app.triggerEvent) {
+                app.triggerEvent('keypress', { key: 'Enter' });
+                console.log('Triggered keypress event on scene');
+              }
+            } catch (e) {
+              console.log('Method 2 failed:', e);
+            }
+            
+            // Method 3: Try accessing the runtime directly if available
+            try {
+              if (app.runtime && app.runtime.trigger) {
+                app.runtime.trigger('keydown', { key: 'Enter' });
+                console.log('Triggered keydown event via runtime');
+              }
+            } catch (e) {
+              console.log('Method 3 failed:', e);
+            }
           }
         } catch (error) {
           console.error('Error triggering Spline animation:', error);
@@ -40,11 +68,9 @@ const SplineViewer: React.FC<SplineViewerProps> = ({ splineUrl, className = '' }
   }, []);
 
   const onLoad = (splineApp: any) => {
+    // Store reference to the Spline app instance
     splineRef.current = splineApp;
-    console.log('Spline scene loaded');
-    
-    // Don't try to call methods that might not exist
-    // Instead, save the reference and use it when needed
+    console.log('Spline scene loaded successfully');
   };
 
   return (
