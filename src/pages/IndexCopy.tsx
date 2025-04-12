@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
@@ -5,6 +6,7 @@ import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
 import SplineViewer from "../components/SplineViewer";
+
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -63,9 +65,9 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* Spline container - confined to right side only */}
-            <div className="flex-none w-full md:w-1/2 h-[400px] md:h-[600px] mt-8 md:mt-0">
-              <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full" scale={1.5} enableInteraction={true} />
+            {/* Spline container - reduced size */}
+            <div className="flex-none w-full md:w-1/2 h-[300px] md:h-[450px] mt-8 md:mt-0">
+              <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full" scale={1.2} enableInteraction={true} />
             </div>
           </div>
         </section>
