@@ -69,7 +69,7 @@ const IndexCopy: React.FC = () => {
               {/* Spline 3D Asset with updated URL and increased height */}
               <div className="w-full h-[600px] md:h-[800px] relative -mt-20 z-0 overflow-visible">
                 <SplineViewer 
-                  splineUrl="https://prod.spline.design/Ze6evzKKyY-Xq6uh/scene.splinecode" 
+                  splineUrl="https://my.spline.design/untitled-41c15b71d723078b8d04f280b68ba50d/" 
                   className="h-full overflow-visible"
                 />
               </div>
