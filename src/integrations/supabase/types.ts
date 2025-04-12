@@ -73,20 +73,14 @@ export type Database = {
         Row: {
           embeddings: string
           id: string
-          name: string | null
-          summary: string | null
         }
         Insert: {
           embeddings: string
           id?: string
-          name?: string | null
-          summary?: string | null
         }
         Update: {
           embeddings?: string
           id?: string
-          name?: string | null
-          summary?: string | null
         }
         Relationships: [
           {
@@ -158,19 +152,6 @@ export type Database = {
       l2_normalize: {
         Args: { "": string } | { "": unknown } | { "": unknown }
         Returns: string
-      }
-      match_urdfs: {
-        Args: {
-          query_embedding: string
-          match_threshold: number
-          match_count: number
-        }
-        Returns: {
-          id: string
-          name: string
-          summary: string
-          score: number
-        }[]
       }
       sparsevec_out: {
         Args: { "": unknown }
