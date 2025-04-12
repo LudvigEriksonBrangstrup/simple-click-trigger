@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Layout from '@/components/layout/Layout';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // This is needed to make TypeScript recognize webkitdirectory as a valid attribute
 declare module 'react' {
@@ -10,8 +11,15 @@ declare module 'react' {
   }
 }
 
+// Create a client
+const queryClient = new QueryClient();
+
 const Index: React.FC = () => {
-  return <Layout />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Layout />
+    </QueryClientProvider>
+  );
 };
 
 export default Index;
