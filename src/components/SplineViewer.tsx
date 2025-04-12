@@ -81,7 +81,7 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
     setIsLoading(false);
   };
 
-  const handleError = (error: Error) => {
+  const handleError = (error: any) => {
     console.error('Error loading Spline scene:', error);
     setHasError(true);
     setIsLoading(false);
@@ -91,6 +91,8 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
   const containerStyle = {
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
+    // Add pointer-events: none to allow scrolling through the component
+    pointerEvents: 'none' as const
   };
 
   return (

@@ -66,12 +66,12 @@ const IndexCopy: React.FC = () => {
                 <span className="block text-gradient-white pb-4">AGENTS</span>
               </h1>
               
-              {/* Spline 3D Asset with increased scale */}
-              <div className="w-full h-[600px] relative -mt-20 z-0 overflow-visible">
+              {/* Spline 3D Asset with increased scale and pointer-events-none */}
+              <div className="w-full h-[600px] relative -mt-20 z-0 overflow-visible pointer-events-none">
                 <SplineViewer 
                   splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
                   className="h-full overflow-visible"
-                  scale={1.5} // Increased scale to make it larger
+                  scale={1.5}
                 />
               </div>
             </div>
