@@ -54,10 +54,10 @@ const IndexCopy: React.FC = () => {
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with strict container separation */}
         <section className="relative overflow-hidden mt-24 pt-10">
-          {/* Create a grid layout to ensure separation */}
-          <div className="flex flex-col md:flex-row items-center md:items-start relative">
-            {/* Text container - absolute width limit, fixed to left side */}
-            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden relative z-50">
+          {/* Modified the layout to ensure proper stacking */}
+          <div className="relative">
+            {/* Title text container - now absolutely positioned on top of everything with very high z-index */}
+            <div className="relative w-full md:w-1/2 pr-0 md:pr-4 z-[9999]">
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
                 <span className="block text-gradient-white text-9xl px-[8px]">PROMPT</span>
                 <span className="block text-gradient-white text-9xl mx-[16px]">SPATIAL</span>
@@ -65,8 +65,8 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* Spline container - reduced size */}
-            <div className="flex-none w-full md:w-1/2 h-[300px] md:h-[450px] mt-8 md:mt-0 relative z-5">
+            {/* Spline container with lower z-index */}
+            <div className="w-full md:absolute md:right-0 md:top-0 md:w-1/2 h-[300px] md:h-[450px] mt-8 md:mt-0 z-10">
               <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full" scale={1.2} enableInteraction={true} />
             </div>
           </div>
