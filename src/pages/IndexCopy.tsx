@@ -59,7 +59,7 @@ const IndexCopy: React.FC = () => {
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
                 <span className="block text-gradient-white text-9xl px-[8px]">PROMPT</span>
                 <span className="block text-gradient-white text-9xl mx-[16px]">SPATIAL</span>
-                <span className="block text-gradient-white text-9xl mx-[12px]">AGENTS</span>
+                <span className="block text-gradient-white text-9xl mx-[11px]">AGENTS</span>
               </h1>
             </div>
             
