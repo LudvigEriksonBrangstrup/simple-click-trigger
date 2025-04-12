@@ -67,26 +67,14 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* See-through blurred divider card on the right */}
+            {/* Floating Spline asset - without visible card */}
             <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[55%] h-[400px] w-full relative mt-8 md:mt-0 z-10">
-              <div className="w-full h-full relative rounded-xl overflow-hidden">
-                {/* Blurred glass background */}
-                <div className="absolute inset-0 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl"></div>
-                
-                {/* Content inside the glass card */}
-                <div className="absolute inset-0 p-6">
-                  {/* Spline 3D Asset */}
-                  <SplineViewer 
-                    splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                    className="h-full overflow-visible"
-                    scale={1.5}
-                    enableInteraction={true}
-                  />
-                </div>
-                
-                {/* Subtle gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/5 pointer-events-none"></div>
-              </div>
+              <SplineViewer 
+                splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
+                className="h-full overflow-visible"
+                scale={1.5}
+                enableInteraction={true}
+              />
             </div>
           </div>
         </section>
