@@ -1,11 +1,12 @@
+
 import React, { useState, useRef, useEffect } from 'react';
-import { contentItems } from '../data/content';
 import { Send, Archive, Database, Globe, Brain } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import ProjectSelector from './ProjectSelector';
 import { ContentItem } from '@/types/content';
 import { useMyList } from '@/hooks/use-my-list';
 import { cn } from '@/lib/utils';
+import { useSupabaseRobots } from '@/hooks/use-supabase-robots';
 
 // Available tool types
 const TOOLS = ['database', 'internet', 'thinking'] as const;
@@ -25,6 +26,7 @@ const ChatWindow: React.FC = () => {
   const [selectedRobot, setSelectedRobot] = useState<ContentItem | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const { isInMyList } = useMyList();
+  const { robots, isLoading: robotsLoading } = useSupabaseRobots();
 
   const getRandomTool = (): ToolType => {
     const randomIndex = Math.floor(Math.random() * TOOLS.length);
@@ -45,12 +47,17 @@ const ChatWindow: React.FC = () => {
     }
     
     let selectedItem;
-    if (userMessage.toLowerCase().includes("construction")) {
-      selectedItem = contentItems.find(item => item.title.toLowerCase().includes("Go2"));
-    } else if (userMessage.toLowerCase().includes("cute")) {
-      selectedItem = contentItems.find(item => item.title.toLowerCase().includes("Cassie"));
-    } else {
-      selectedItem = contentItems[3]; // Default to the first item
+    // Use our fetched robots instead of contentItems
+    if (robots.length > 0) {
+      if (userMessage.toLowerCase().includes("construction")) {
+        selectedItem = robots.find(item => item.title.toLowerCase().includes("Go2"));
+      } else if (userMessage.toLowerCase().includes("cute")) {
+        selectedItem = robots.find(item => item.title.toLowerCase().includes("Cassie"));
+      } else {
+        // Select a random robot if no specific match
+        const randomIndex = Math.floor(Math.random() * robots.length);
+        selectedItem = robots[randomIndex];
+      }
     }
     
     if (!selectedItem) {
@@ -156,6 +163,15 @@ const ChatWindow: React.FC = () => {
       }, 50); // Add a slight delay to ensure the DOM is updated
     }
   }, [messages, toolLoading]);
+
+  // Return loading state if robots aren't loaded yet
+  if (robotsLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-pulse text-white">Loading robots data...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full bg-transparent text-white">

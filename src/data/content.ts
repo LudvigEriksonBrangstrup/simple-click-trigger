@@ -7,6 +7,7 @@ export const categories: Category[] = [
   { id: "rovers", name: "Rovers" },
 ];
 
+// These will be used as fallback content items if Supabase fails
 export const contentItems: ContentItem[] = [
   {
     id: "1",
