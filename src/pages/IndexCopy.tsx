@@ -67,11 +67,11 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* Floating Spline asset - without visible card */}
-            <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[55%] h-[400px] w-full relative mt-8 md:mt-0 z-10">
+            {/* Completely invisible container for Spline asset - just the model with no background */}
+            <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[55%] h-[400px] w-full relative mt-8 md:mt-0 z-10" style={{ background: 'transparent', pointerEvents: 'auto' }}>
               <SplineViewer 
                 splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                className="h-full overflow-visible"
+                className="h-full w-full overflow-visible"
                 scale={1.5}
                 enableInteraction={true}
               />
