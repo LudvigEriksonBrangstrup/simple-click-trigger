@@ -25,16 +25,38 @@ export function useQueryRobots(categoryId?: string) {
       
       if (data) {
         // Map Supabase data to our ContentItem format
-        const mappedRobots = data.map(robot => ({
-          id: robot.id,
-          title: robot.name,
-          // Use image_uri from Supabase or fall back to placeholder
-          imageUrl: robot.image_uri || '/placeholder.svg',
-          description: robot.summary || `A ${robot.type || 'robot'} created by ${robot.maker || 'unknown maker'}.`,
-          categories: robot.tags || ['trending'],
-          urdfPath: robot.urdf_uri || '',
-        }));
+        const mappedRobots = data.map(robot => {
+          // Check if image_uri is a storage path or direct URL
+          let imageUrl = '/placeholder.svg';
+          
+          if (robot.image_uri) {
+            // If image_uri is already a complete URL, use it directly
+            if (robot.image_uri.startsWith('http')) {
+              imageUrl = robot.image_uri;
+            } else {
+              // If it's a storage path, construct the public URL
+              // Format: {bucketName}/{folderPath}/{fileName}
+              const { publicURL } = supabase.storage
+                .from('robots')  // Use your actual bucket name here
+                .getPublicUrl(robot.image_uri);
+                
+              if (publicURL) {
+                imageUrl = publicURL;
+              }
+            }
+          }
+          
+          return {
+            id: robot.id,
+            title: robot.name,
+            imageUrl: imageUrl,
+            description: robot.summary || `A ${robot.type || 'robot'} created by ${robot.maker || 'unknown maker'}.`,
+            categories: robot.tags || ['trending'],
+            urdfPath: robot.urdf_uri || '',
+          };
+        });
         
+        console.log('Mapped robots with images:', mappedRobots);
         return mappedRobots;
       }
       
