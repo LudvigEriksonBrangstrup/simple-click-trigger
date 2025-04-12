@@ -56,9 +56,9 @@ const IndexCopy: React.FC = () => {
         {/* Cosmic hero section with parallax text */}
         <section className="relative overflow-visible">
           <div className="w-full relative mb-8 flex flex-col md:flex-row items-center justify-between">
-            {/* Parallax text container */}
-            <div className="relative z-10 text-left md:text-left px-0 md:px-0 max-w-6xl mx-auto mt-24 pt-16 md:w-1/2">
-              <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
+            {/* Parallax text container - moved back to the left */}
+            <div className="relative z-10 text-left px-0 md:px-0 max-w-5xl mt-24 pt-16 md:w-1/2">
+              <h1 className="text-7xl md:text-[13rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
                 <span className="block -mb-12 text-gradient-white">PROMPT</span>
                 <span className="block -mb-12 text-gradient-white">
                   SPATIAL
@@ -67,15 +67,25 @@ const IndexCopy: React.FC = () => {
               </h1>
             </div>
             
-            {/* Spline 3D Asset positioned to the right of the text */}
-            <div className="md:absolute md:right-0 md:top-0 md:h-[600px] md:w-[60%] h-[400px] w-full relative mt-4 md:-mt-16 z-10 overflow-visible">
-              <div className="w-full h-full relative">
-                <SplineViewer 
-                  splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                  className="h-full overflow-visible"
-                  scale={1.5}
-                  enableInteraction={true}
-                />
+            {/* See-through blurred divider card on the right */}
+            <div className="md:absolute md:right-0 md:top-24 md:h-[600px] md:w-[55%] h-[400px] w-full relative mt-8 md:mt-0 z-10">
+              <div className="w-full h-full relative rounded-xl overflow-hidden">
+                {/* Blurred glass background */}
+                <div className="absolute inset-0 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl"></div>
+                
+                {/* Content inside the glass card */}
+                <div className="absolute inset-0 p-6">
+                  {/* Spline 3D Asset */}
+                  <SplineViewer 
+                    splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
+                    className="h-full overflow-visible"
+                    scale={1.5}
+                    enableInteraction={true}
+                  />
+                </div>
+                
+                {/* Subtle gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/5 pointer-events-none"></div>
               </div>
             </div>
           </div>
