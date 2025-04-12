@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "../data/content";
 import ContentCarousel from "../components/ContentCarousel";
@@ -6,7 +5,6 @@ import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import TeamSection from "../components/TeamSection";
 import SplineViewer from "../components/SplineViewer";
-
 const IndexCopy: React.FC = () => {
   // const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -34,7 +32,6 @@ const IndexCopy: React.FC = () => {
 
   // Only get the trending category
   const trendingCategory = categories.find(category => category.id === "trending");
-
   return <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
@@ -60,20 +57,15 @@ const IndexCopy: React.FC = () => {
             {/* Text container - absolute width limit, fixed to left side */}
             <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden">
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
-                <span className="block text-gradient-white">PROMPT</span>
-                <span className="block text-gradient-white">SPATIAL</span>
-                <span className="block text-gradient-white">AGENTS</span>
+                <span className="block text-gradient-white text-9xl">PROMPT</span>
+                <span className="block text-gradient-white text-9xl">SPATIAL</span>
+                <span className="block text-gradient-white text-9xl">AGENTS</span>
               </h1>
             </div>
             
             {/* Spline container - confined to right side only */}
             <div className="flex-none w-full md:w-1/2 h-[400px] md:h-[600px] mt-8 md:mt-0">
-              <SplineViewer 
-                splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                className="h-full w-full"
-                scale={1.5}
-                enableInteraction={true}
-              />
+              <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full" scale={1.5} enableInteraction={true} />
             </div>
           </div>
         </section>
@@ -106,5 +98,4 @@ const IndexCopy: React.FC = () => {
       </main>
     </div>;
 };
-
 export default IndexCopy;
