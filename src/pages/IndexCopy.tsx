@@ -54,25 +54,23 @@ const IndexCopy: React.FC = () => {
 
       <main className="container mx-auto px-4 pb-8 max-w-full relative z-10">
         {/* Cosmic hero section with strict container separation */}
-        <section className="relative overflow-visible mt-24 pt-10">
+        <section className="relative overflow-hidden mt-24 pt-10">
           {/* Create a grid layout to ensure separation */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {/* Text container - strictly confined to left side with hard width limit */}
-            <div className="z-10 text-left px-0 flex flex-col w-full md:w-[50%] overflow-hidden">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
-                <span className="block -mb-10 text-gradient-white">PROMPT</span>
-                <span className="block -mb-10 text-gradient-white">
-                  SPATIAL
-                </span>
-                <span className="block text-gradient-white pb-4">AGENTS</span>
+          <div className="flex flex-col md:flex-row items-center md:items-start">
+            {/* Text container - absolute width limit, fixed to left side */}
+            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden">
+              <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
+                <span className="block text-gradient-white">PROMPT</span>
+                <span className="block text-gradient-white">SPATIAL</span>
+                <span className="block text-gradient-white">AGENTS</span>
               </h1>
             </div>
             
-            {/* Spline container - strictly confined to right side */}
-            <div className="relative z-10 h-[500px] md:h-[600px] w-full overflow-visible flex justify-center items-center">
+            {/* Spline container - confined to right side only */}
+            <div className="flex-none w-full md:w-1/2 h-[400px] md:h-[600px] mt-8 md:mt-0">
               <SplineViewer 
                 splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                className="h-full w-full overflow-visible"
+                className="h-full w-full"
                 scale={1.5}
                 enableInteraction={true}
               />
