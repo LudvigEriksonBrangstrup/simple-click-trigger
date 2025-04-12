@@ -55,9 +55,9 @@ const IndexCopy: React.FC = () => {
         {/* Cosmic hero section with strict container separation */}
         <section className="relative overflow-hidden mt-24 pt-10">
           {/* Create a grid layout to ensure separation */}
-          <div className="flex flex-col md:flex-row items-center md:items-start">
+          <div className="flex flex-col md:flex-row items-center md:items-start relative">
             {/* Text container - absolute width limit, fixed to left side */}
-            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden">
+            <div className="flex-none w-full md:w-1/2 pr-0 md:pr-4 overflow-hidden relative z-10">
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white animate-fade-in text-glow leading-tight font-sans">
                 <span className="block text-gradient-white text-9xl px-[8px]">PROMPT</span>
                 <span className="block text-gradient-white text-9xl mx-[16px]">SPATIAL</span>
@@ -66,7 +66,7 @@ const IndexCopy: React.FC = () => {
             </div>
             
             {/* Spline container - reduced size */}
-            <div className="flex-none w-full md:w-1/2 h-[300px] md:h-[450px] mt-8 md:mt-0">
+            <div className="flex-none w-full md:w-1/2 h-[300px] md:h-[450px] mt-8 md:mt-0 relative z-5">
               <SplineViewer splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" className="h-full w-full" scale={1.2} enableInteraction={true} />
             </div>
           </div>
