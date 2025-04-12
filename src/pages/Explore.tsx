@@ -1,15 +1,17 @@
 
 import React from "react";
-import { contentItems } from "../data/content";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import TeamSection from "../components/TeamSection";
-import { ContentItem } from "../types/content";
 import ChatWindow from "../components/ChatWindow";
+import { useSupabaseRobots } from "@/hooks/use-supabase-robots";
 
 const Explore: React.FC = () => {
-  // Group content items by categories
-  const categorizedContent = contentItems.reduce((acc, item) => {
+  // Fetch robots from Supabase
+  const { robots, isLoading } = useSupabaseRobots();
+
+  // Group content items by categories from the tags
+  const categorizedContent = robots.reduce((acc, item) => {
     item.categories.forEach(category => {
       if (!acc[category]) {
         acc[category] = [];
@@ -17,12 +19,13 @@ const Explore: React.FC = () => {
       acc[category].push(item);
     });
     return acc;
-  }, {} as Record<string, ContentItem[]>);
+  }, {} as Record<string, typeof robots>);
 
   // Get unique categories
   const uniqueCategories = Object.keys(categorizedContent).sort();
 
-  return <div className="min-h-screen bg-netflix-background text-netflix-text">
+  return (
+    <div className="min-h-screen bg-netflix-background text-netflix-text">
       <Header />
 
       {/* Cosmic background wrapper */}
@@ -45,7 +48,9 @@ const Explore: React.FC = () => {
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white animate-fade-in">
               Explore All Robots
             </h1>
-            <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">Browse our complete collection of robotics systems and deployable URDF units</p>
+            <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+              Browse our complete collection of robotics systems and deployable URDF units
+            </p>
           </div>
 
           {/* Chat window right below the title */}
@@ -55,17 +60,30 @@ const Explore: React.FC = () => {
             </div>
           </section>
 
-          {/* Content sections */}
-          <div className="relative z-10">
-            <div className="space-y-20">
-              {uniqueCategories.map(category => <section key={category} className="category-section min-h-[20vh]">
-                  <h2 className="text-3xl font-bold mb-8 text-netflix-text text-glow capitalize">
-                    {category}
-                  </h2>
-                  <Carousel title={category} items={categorizedContent[category]} className="glass-panel p-6 rounded-xl" />
-                </section>)}
+          {/* Loading state */}
+          {isLoading ? (
+            <div className="flex items-center justify-center h-40">
+              <div className="animate-pulse text-white">Loading robots data...</div>
             </div>
-          </div>
+          ) : (
+            /* Content sections */
+            <div className="relative z-10">
+              <div className="space-y-20">
+                {uniqueCategories.map(category => (
+                  <section key={category} className="category-section min-h-[20vh]">
+                    <h2 className="text-3xl font-bold mb-8 text-netflix-text text-glow capitalize">
+                      {category}
+                    </h2>
+                    <Carousel 
+                      title={category} 
+                      items={categorizedContent[category]} 
+                      className="glass-panel p-6 rounded-xl" 
+                    />
+                  </section>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Team Section */}
           <div className="mt-20">
@@ -73,7 +91,8 @@ const Explore: React.FC = () => {
           </div>
         </main>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Explore;
