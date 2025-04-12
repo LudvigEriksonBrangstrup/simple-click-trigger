@@ -5,15 +5,15 @@ import Spline from '@splinetool/react-spline';
 interface SplineViewerProps {
   splineUrl: string;
   className?: string;
-  scale?: number; 
-  enableInteraction?: boolean;
+  scale?: number; // Added scale prop
+  enableInteraction?: boolean; // New prop to control interaction
 }
 
 const SplineViewer: React.FC<SplineViewerProps> = ({ 
   splineUrl, 
   className = '',
-  scale = 1,
-  enableInteraction = true
+  scale = 1, // Default scale is 1
+  enableInteraction = true // Default to true
 }) => {
   const splineRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -93,10 +93,8 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
   const containerStyle = {
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
-    pointerEvents: enableInteraction ? 'auto' as const : 'none' as const,
-    background: 'transparent', // Ensure background is transparent
-    boxShadow: 'none', // Remove any shadow
-    border: 'none' // Remove any border
+    // Apply pointer-events based on enableInteraction prop
+    pointerEvents: enableInteraction ? 'auto' as const : 'none' as const
   };
 
   return (
