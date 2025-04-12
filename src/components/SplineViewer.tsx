@@ -5,15 +5,15 @@ import Spline from '@splinetool/react-spline';
 interface SplineViewerProps {
   splineUrl: string;
   className?: string;
-  scale?: number; // Added scale prop
-  enableInteraction?: boolean; // New prop to control interaction
+  scale?: number;
+  enableInteraction?: boolean;
 }
 
 const SplineViewer: React.FC<SplineViewerProps> = ({ 
   splineUrl, 
   className = '',
-  scale = 1, // Default scale is 1
-  enableInteraction = true // Default to true
+  scale = 1,
+  enableInteraction = true
 }) => {
   const splineRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -94,11 +94,16 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
     // Apply pointer-events based on enableInteraction prop
-    pointerEvents: enableInteraction ? 'auto' as const : 'none' as const
+    pointerEvents: enableInteraction ? 'auto' as const : 'none' as const,
+    // Ensure the container stays within its bounds
+    position: 'relative' as const,
+    width: '100%',
+    height: '100%',
+    overflow: 'visible' as const
   };
 
   return (
-    <div className={`w-full ${className}`} style={containerStyle}>
+    <div className={`w-full h-full ${className}`} style={containerStyle}>
       {isLoading && (
         <div className="w-full h-full flex items-center justify-center text-white opacity-60">
           Loading 3D model...
