@@ -67,10 +67,10 @@ const IndexCopy: React.FC = () => {
               </h1>
               
               {/* Spline 3D Asset with increased height and no overflow cutting */}
-              <div className="w-full h-[400px] relative -mt-20 z-0 overflow-visible">
+              <div className="w-full h-[600px] md:h-[800px] relative -mt-20 z-0 overflow-visible">
                 <SplineViewer 
                   splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
-                  className="h-full overflow-visible"
+                  className="overflow-visible"
                 />
               </div>
             </div>
