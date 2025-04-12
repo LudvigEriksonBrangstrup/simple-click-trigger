@@ -6,12 +6,14 @@ interface SplineViewerProps {
   splineUrl: string;
   className?: string;
   scale?: number; // Added scale prop
+  enableInteraction?: boolean; // New prop to control interaction
 }
 
 const SplineViewer: React.FC<SplineViewerProps> = ({ 
   splineUrl, 
   className = '',
-  scale = 1 // Default scale is 1
+  scale = 1, // Default scale is 1
+  enableInteraction = true // Default to true
 }) => {
   const splineRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,8 +93,8 @@ const SplineViewer: React.FC<SplineViewerProps> = ({
   const containerStyle = {
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
-    // Add pointer-events: none to allow scrolling through the component
-    pointerEvents: 'none' as const
+    // Apply pointer-events based on enableInteraction prop
+    pointerEvents: enableInteraction ? 'auto' as const : 'none' as const
   };
 
   return (

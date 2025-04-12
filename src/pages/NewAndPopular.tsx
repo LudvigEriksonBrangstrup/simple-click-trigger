@@ -16,6 +16,7 @@ const NewAndPopular: React.FC = () => {
           <SplineViewer 
             splineUrl="https://prod.spline.design/Ze6evzKLyY-Xq6uh/scene.splinecode" 
             scale={1.8} 
+            enableInteraction={true}
           />
         </div>
         
