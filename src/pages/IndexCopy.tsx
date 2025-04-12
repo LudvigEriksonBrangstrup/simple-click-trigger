@@ -57,11 +57,11 @@ const IndexCopy: React.FC = () => {
         <section className="relative overflow-visible mt-24 pt-10">
           {/* Create a grid layout to ensure separation */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {/* Text container - strictly confined to left side with max-width */}
-            <div className="z-10 text-left px-0 flex flex-col max-w-full md:max-w-[50vw] overflow-visible">
-              <h1 className="text-7xl md:text-[8rem] lg:text-[10rem] font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
-                <span className="block -mb-12 text-gradient-white">PROMPT</span>
-                <span className="block -mb-12 text-gradient-white">
+            {/* Text container - strictly confined to left side with hard width limit */}
+            <div className="z-10 text-left px-0 flex flex-col w-full md:w-[50%] overflow-hidden">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter whitespace-nowrap text-white animate-fade-in text-glow leading-none font-sans">
+                <span className="block -mb-10 text-gradient-white">PROMPT</span>
+                <span className="block -mb-10 text-gradient-white">
                   SPATIAL
                 </span>
                 <span className="block text-gradient-white pb-4">AGENTS</span>
